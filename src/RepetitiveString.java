@@ -1,35 +1,38 @@
 import java.util.Scanner;
 
 public class RepetitiveString {
-    private String inputString;
+    private final String inputString;
 
     private RepetitiveString(String inputString){
         this.inputString = inputString;
     }
 
-    private void printPattern(){
-        int currentIndex = 0;
-
-        while (currentIndex != this.inputString.length() - 1){
-            int[] result = getNumberLimit(currentIndex);
-
-            while (result[1]!=0){
-                System.out.print(this.inputString.charAt(currentIndex));
-                result[1]--;
+    private void printPattern() {
+        char currentCharacter = '0';
+        int currentNumber = 0;
+        int iterator = 0;
+        while (iterator < this.inputString.length()) {
+            char currentChar = this.inputString.charAt(iterator);
+            if (Character.isDigit(currentChar)) {
+                currentNumber = currentNumber * 10;
+                currentNumber+=Character.getNumericValue(currentChar);
+                iterator++;
+                continue;
             }
-            currentIndex = result[0];
+            int count = currentNumber;
+            while (count-->0) {
+                System.out.print(currentCharacter);
+            }
+            currentCharacter = currentChar;
+            currentNumber = 0;
+            iterator++;
+        }
+        int count = currentNumber;
+        while (count-->0) {
+            System.out.print(currentCharacter);
         }
     }
 
-    private int[] getNumberLimit(int currentIndex){
-        int number = 0;
-        while (Character.isDigit(this.inputString.charAt(currentIndex+1))){
-            number+= Integer.parseInt(String.valueOf(this.inputString.charAt(currentIndex+1)));
-            currentIndex+=1;
-            number*=10;
-        }
-        return new int[]{currentIndex,number/10};
-    }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

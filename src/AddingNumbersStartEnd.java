@@ -24,7 +24,6 @@ public class AddingNumbersStartEnd {
     }
 
     public static void main(String[] args) {
-
         Scanner scanner = new Scanner(System.in);
         AddingNumbersStartEnd addingNumbersStartEnd = new AddingNumbersStartEnd(scanner.next());
         addingNumbersStartEnd.addAll();
